@@ -111,16 +111,6 @@
                  title="點擊查看"
                  onclick="openLogBook()"
                  onerror="this.src='https://placehold.co/300x200/34495e/ecf0f1?text=Log+Book'">
-
-            <!-- 底部對話框 (護士的說話) -->
-            <div id="nurse-dialogue" class="absolute bottom-6 left-1/2 transform -translate-x-1/2 w-11/12 max-w-4xl dialogue-box p-4 flex items-start space-x-4 opacity-0 transition-opacity duration-500">
-                <div class="w-16 h-16 rounded-full bg-blue-200 border-2 border-white flex items-center justify-center text-2xl flex-shrink-0 overflow-hidden bg-center bg-cover" style="background-image: url('https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah&style=circle')">
-                </div>
-                <div class="flex-1">
-                    <h3 class="text-blue-300 font-bold text-lg mb-1">護士 Sarah</h3>
-                    <p class="text-white text-lg">奶奶您好，所有訪客都需要登記。麻煩您點擊桌上那本<span class="text-yellow-300 font-bold">訪客登記簿</span>填寫一下，謝謝您。</p>
-                </div>
-            </div>
         </div>
 
         <!-- 遊戲內彈出視窗：查看登記簿內容 -->
@@ -223,12 +213,6 @@
         // 3. 趕往醫院 -> 切換到醫院大廳場景
         function goToHospital() {
             switchScene('scene-phone', 'scene-hospital');
-            
-            // 延遲幾秒後顯示護士的對話框，引導玩家操作
-            setTimeout(() => {
-                const nurseDialogue = document.getElementById('nurse-dialogue');
-                nurseDialogue.classList.remove('opacity-0');
-            }, 1500);
         }
 
         // 4. 點擊桌上的訪客登記簿
