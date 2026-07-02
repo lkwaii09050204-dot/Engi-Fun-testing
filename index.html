@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>醫院探秘：第二章 - 尋找真相</title>
+    <title>Hospital Mystery: Chapter 2 - Seeking the Truth</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* 遊戲容器設定，保持 16:9 比例 */
@@ -45,14 +45,6 @@
             position: absolute;
             inset: 0;
         }
-
-        /* 對話框樣式 */
-        .dialogue-box {
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #fff;
-            border-radius: 12px;
-            text-shadow: 1px 1px 2px black;
-        }
     </style>
 </head>
 <body class="bg-gray-900 min-h-screen flex items-center justify-center p-4 select-none">
@@ -62,15 +54,15 @@
         
         <!-- 場景 0：開始畫面 -->
         <div id="scene-start" class="active-scene bg-gray-800 flex flex-col items-center justify-center text-white z-50">
-            <h1 class="text-5xl font-bold mb-4 tracking-widest text-red-400">謊言的代價</h1>
-            <h2 class="text-2xl mb-12 text-gray-300">第二章：意外與真相</h2>
+            <h1 class="text-5xl font-bold mb-4 tracking-widest text-red-400">The Price of Lies</h1>
+            <h2 class="text-2xl mb-12 text-gray-300">Chapter 2: Accident and Truth</h2>
             <p class="mb-8 text-gray-400 max-w-xl text-center leading-relaxed">
-                前情提要：偵探向母親隱瞞了兒子離家出走的真正原因（母親出軌）。<br>
-                表面上，這個家庭恢復了平靜。<br>
-                直到今天，身為奶奶的妳，接到了一通打破虛假寧靜的電話...
+                Previously: The detective hid the real reason for the son's running away (the mother's affair).<br>
+                On the surface, peace was restored to the family.<br>
+                Until today, you, playing as the grandmother, receive a phone call that shatters this false tranquility...
             </p>
             <button onclick="startGame()" class="px-8 py-3 bg-red-600 hover:bg-red-500 text-white font-bold rounded-full transition transform hover:scale-105 shadow-lg">
-                開始遊戲
+                Start Game
             </button>
         </div>
 
@@ -88,27 +80,26 @@
                     <!-- 對話內容會透過 JS 動態顯示 -->
                 </div>
                 <button id="btn-hospital" onclick="goToHospital()" class="hidden px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition shadow-lg">
-                    立刻趕往醫院
+                    Rush to Hospital Immediately
                 </button>
             </div>
         </div>
 
         <!-- 場景 2：醫院登記處 (Registration Desk) -->
         <div id="scene-hospital" class="hidden-scene z-30 bg-black">
-            <!-- 背景圖片 (請確保檔案名稱與位置正確，這裡加上了 onerror 備用圖防錯) -->
+            <!-- 背景圖片 -->
             <img src="scene 1-Registration Desk.png" 
-                 alt="醫院登記處" 
+                 alt="Hospital Registration Desk" 
                  class="w-full h-full object-cover"
                  onerror="this.src='https://placehold.co/1920x1080/2c3e50/ecf0f1?text=Hospital+Registration+Desk+(Missing+Image)'">
             
             <!-- 互動道具：訪客登記簿 -->
-            <!-- 根據原圖比例抓取大約位置，可透過修改 style 的 left/top/width 來微調位置 -->
             <img src="Visitor log book-png.png" 
                  id="item-logbook"
                  class="interactive-item" 
                  style="left: 48%; top: 76%; width: 15%; transform-origin: center center;"
-                 alt="訪客登記簿"
-                 title="點擊查看"
+                 alt="Visitor Log Book"
+                 title="Click to examine"
                  onclick="openLogBook()"
                  onerror="this.src='https://placehold.co/300x200/34495e/ecf0f1?text=Log+Book'">
         </div>
@@ -119,30 +110,30 @@
                 
                 <button onclick="closeLogBook()" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 font-bold text-2xl">&times;</button>
                 
-                <h2 class="text-3xl text-center font-bold text-gray-800 mb-6 border-b-2 border-gray-400 pb-2">VISITOR LOG BOOK (訪客登記簿)</h2>
+                <h2 class="text-3xl text-center font-bold text-gray-800 mb-6 border-b-2 border-gray-400 pb-2">VISITOR LOG BOOK</h2>
                 
                 <div class="flex-1 overflow-y-auto pr-4">
                     <table class="w-full text-left text-gray-700 text-lg">
                         <thead>
                             <tr class="border-b-2 border-gray-400">
-                                <th class="pb-2">日期</th>
-                                <th class="pb-2">時間</th>
-                                <th class="pb-2">訪客姓名</th>
-                                <th class="pb-2">探訪病患</th>
-                                <th class="pb-2">關係</th>
+                                <th class="pb-2">Date</th>
+                                <th class="pb-2">Time</th>
+                                <th class="pb-2">Visitor Name</th>
+                                <th class="pb-2">Patient</th>
+                                <th class="pb-2">Relationship</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-300">
                             <!-- 混淆視聽的一般訪客 -->
                             <tr class="h-12">
-                                <td>10/24</td><td>14:30</td><td>John Doe</td><td>Mary Doe</td><td>丈夫</td>
+                                <td>10/24</td><td>14:30</td><td>John Doe</td><td>Mary Doe</td><td>Husband</td>
                             </tr>
                             <tr class="h-12">
-                                <td>10/24</td><td>15:15</td><td>李阿姨</td><td>林伯伯</td><td>朋友</td>
+                                <td>10/24</td><td>15:15</td><td>Auntie Lee</td><td>Mr. Lin</td><td>Friend</td>
                             </tr>
                             <!-- 第一集相關人物的線索 (伏筆) -->
                             <tr class="h-12 bg-red-50">
-                                <td>10/24</td><td class="text-red-600 font-bold">16:45</td><td class="text-red-600 font-bold">??? (字跡潦草)</td><td>(你女兒的名字)</td><td>???</td>
+                                <td>10/24</td><td class="text-red-600 font-bold">16:45</td><td class="text-red-600 font-bold">??? (Messy handwriting)</td><td>(Your daughter's name)</td><td>???</td>
                             </tr>
                             <tr class="h-12">
                                 <td>10/24</td><td>17:00</td><td>-</td><td>-</td><td>-</td>
@@ -152,9 +143,9 @@
                 </div>
                 
                 <div class="mt-6 text-center">
-                    <p class="text-gray-600 italic mb-4">這字跡... 是誰在她出車禍前/後來看過她？</p>
+                    <p class="text-gray-600 italic mb-4">This handwriting... Who came to see her right before/after the car crash?</p>
                     <button onclick="signAndContinue()" class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-bold rounded shadow">
-                        簽名並進入病房區 (前往下一關)
+                        Sign and Enter Ward Area (Next Level)
                     </button>
                 </div>
             </div>
@@ -189,10 +180,10 @@
             
             // 簡單的文字打字機效果
             const texts = [
-                "「喂？請問是奶奶嗎？」",
-                "「這裡是市立警察局。非常抱歉通知您...」",
-                "「您的女兒剛剛發生了嚴重的車禍，目前正在市立醫院急救中。」",
-                "「請您立刻前往醫院！」"
+                "\"Hello? Is this grandma?\"",
+                "\"This is the City Police Department. We regret to inform you...\"",
+                "\"Your daughter was just involved in a severe car accident. She is currently in the emergency room at City Hospital.\"",
+                "\"Please come to the hospital immediately!\""
             ];
             
             let step = 0;
@@ -232,7 +223,7 @@
             closeLogBook();
             // 在這裡可以實作切換到下一個場景（病房 3 面牆）的邏輯
             // 目前先用一個友善的自製提示框代替原生 alert
-            showCustomMessage("系統提示", "你已經完成登記！接下來將解鎖進入病房區域。 (第一關展示完畢)");
+            showCustomMessage("System Notification", "You have signed in! Access to the ward area is now unlocked. (End of Chapter 2 Demo)");
         }
 
         // 自製提示框 (避免使用瀏覽器預設的 alert)
@@ -243,7 +234,7 @@
                 <div class="bg-gray-800 border-2 border-gray-600 rounded-lg p-6 max-w-md w-full text-center shadow-2xl">
                     <h3 class="text-xl font-bold text-white mb-4">${title}</h3>
                     <p class="text-gray-300 mb-6">${text}</p>
-                    <button class="px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded" onclick="this.parentElement.parentElement.remove()">確定</button>
+                    <button class="px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded" onclick="this.parentElement.parentElement.remove()">OK</button>
                 </div>
             `;
             document.body.appendChild(msgBox);
