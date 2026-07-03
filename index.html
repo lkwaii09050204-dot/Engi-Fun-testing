@@ -68,30 +68,16 @@
 
         <!-- 場景 1：警察來電 -->
         <div id="scene-phone" class="hidden-scene bg-gray-900 flex flex-col items-center justify-center z-40 relative">
-            <!-- 簡單的電話響鈴動畫背景 -->
-            <div class="absolute inset-0 flex items-center justify-center opacity-20">
-                <div class="w-64 h-64 border-4 border-red-500 rounded-full animate-ping"></div>
-            </div>
-            
             <div class="z-10 text-center">
                 <div class="text-6xl mb-6">📱</div>
-                <p class="text-xl text-gray-300 mb-2 italic">Ring Ring Ring...</p>
-                <div id="phone-dialogue" class="text-2xl text-white font-semibold mb-8 max-w-2xl px-6 h-24">
-                    <!-- 對話內容會透過 JS 動態顯示 -->
-                </div>
-                <button id="btn-hospital" onclick="goToHospital()" class="hidden px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition shadow-lg">
-                    Rush to Hospital Immediately
-                </button>
+                <div id="phone-dialogue" class="text-2xl text-white font-semibold mb-8 max-w-2xl px-6 h-24"></div>
+                <button id="btn-hospital" onclick="goToHospital()" class="hidden px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition shadow-lg">Rush to Hospital Immediately</button>
             </div>
         </div>
 
-        <!-- 場景 2：醫院登記處 (Registration Desk) -->
+        <!-- 場景 2：醫院登記處 -->
         <div id="scene-hospital" class="hidden-scene z-30 bg-black">
-            <!-- 背景圖片 -->
-            <img src="scene 1-Registration Desk.png" 
-                 alt="Hospital Registration Desk" 
-                 class="w-full h-full object-cover"
-                 onerror="this.src='https://placehold.co/1920x1080/2c3e50/ecf0f1?text=Hospital+Registration+Desk+(Missing+Image)'">
+            <img src="scene 1-Registration Desk.png" alt="Hospital Registration Desk" class="w-full h-full object-cover">
             
             <!-- 互動道具：訪客登記簿 -->
             <img src="Visitor log book-png.png" 
@@ -100,76 +86,45 @@
                  style="left: 46%; top: 73%; width: 19%; transform-origin: center center;"
                  alt="Visitor Log Book"
                  title="Click to examine"
-                 onclick="openLogBook()"
-                 onerror="this.src='https://placehold.co/300x200/34495e/ecf0f1?text=Log+Book'">
+                 onclick="openLogBook()">
         </div>
 
-         <!-- 護士說話區域 (放置在容器外部，不遮擋圖畫) -->
-    <div id="nurse-speech" class="hidden fade-in mt-6 p-6 bg-white w-full max-w-5xl rounded-xl border-2 border-blue-400 shadow-lg">
-        <p class="text-xl text-gray-800 font-semibold">Nurse Sarah: All visitors are required to sign in. Could you fill this out, please?</p>
-    </div>
-
-        <!-- 遊戲內彈出視窗：查看登記簿內容 -->
+        <!-- 彈出視窗：查看登記簿圖片 -->
         <div id="modal-logbook" class="hidden absolute inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4">
-            <div class="bg-gray-100 w-full max-w-3xl h-3/4 rounded-sm shadow-2xl p-8 relative flex flex-col" style="background-image: url('https://www.transparenttextures.com/patterns/lined-paper-2.png');">
+            <div class="bg-gray-100 w-full max-w-4xl h-5/6 rounded-sm shadow-2xl relative flex flex-col items-center justify-center p-2">
+                <button onclick="closeLogBook()" class="absolute top-2 right-4 text-gray-800 hover:text-red-500 font-bold text-3xl z-10 bg-white bg-opacity-50 rounded-full w-10 h-10 flex items-center justify-center">&times;</button>
                 
-                <button onclick="closeLogBook()" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 font-bold text-2xl">&times;</button>
-                
-                <h2 class="text-3xl text-center font-bold text-gray-800 mb-6 border-b-2 border-gray-400 pb-2">VISITOR LOG BOOK</h2>
-                
-                <div class="flex-1 overflow-y-auto pr-4">
-                    <table class="w-full text-left text-gray-700 text-lg">
-                        <thead>
-                            <tr class="border-b-2 border-gray-400">
-                                <th class="pb-2">Date</th>
-                                <th class="pb-2">Time</th>
-                                <th class="pb-2">Visitor Name</th>
-                                <th class="pb-2">Patient</th>
-                                <th class="pb-2">Relationship</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-300">
-                            <!-- 混淆視聽的一般訪客 -->
-                            <tr class="h-12">
-                                <td>10/24</td><td>14:30</td><td>John Doe</td><td>Mary Doe</td><td>Husband</td>
-                            </tr>
-                            <tr class="h-12">
-                                <td>10/24</td><td>15:15</td><td>Auntie Lee</td><td>Mr. Lin</td><td>Friend</td>
-                            </tr>
-                            <!-- 第一集相關人物的線索 (伏筆) -->
-                            <tr class="h-12 bg-red-50">
-                                <td>10/24</td><td class="text-red-600 font-bold">16:45</td><td class="text-red-600 font-bold">??? (Messy handwriting)</td><td>(Your daughter's name)</td><td>???</td>
-                            </tr>
-                            <tr class="h-12">
-                                <td>10/24</td><td>17:00</td><td>-</td><td>-</td><td>-</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="flex-1 w-full h-full overflow-hidden flex items-center justify-center bg-gray-200 rounded">
+                    <img src="visitor book 内頁設計.jpeg" 
+                         alt="Visitor Log Book Content" 
+                         class="max-w-full max-h-full object-contain"
+                         onerror="this.src='https://placehold.co/800x600/34495e/ecf0f1?text=Log+Book+Content+(Missing+Image)'">
                 </div>
                 
-                <div class="mt-6 text-center">
-                    <p class="text-gray-600 italic mb-4">This handwriting... Who came to see her right before/after the car crash?</p>
-                    <button onclick="signAndContinue()" class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-bold rounded shadow">
-                        Sign and Enter Ward Area (Next Level)
-                    </button>
-                </div>
+                <button onclick="closeLogBook()" class="mt-4 mb-2 px-8 py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded shadow-lg transition transform hover:scale-105">
+                    Close & Continue
+                </button>
             </div>
         </div>
 
     </div>
 
-    <!-- 遊戲邏輯 Script -->
+    <!-- 護士說話區域 (放置在容器外部，不遮擋圖畫) -->
+    <div id="nurse-speech" class="hidden fade-in mt-6 p-6 bg-white w-full max-w-5xl rounded-xl border-2 border-blue-400 shadow-lg">
+        <p class="text-xl text-gray-800 font-semibold">Nurse Sarah: All visitors are required to sign in. Could you fill this out, please?</p>
+    </div>
+
     <script>
-        // 切換場景的通用函數
+        // 切換場景邏輯：確保元素存在才切換
         function switchScene(hideId, showId) {
             const hideEl = document.getElementById(hideId);
             const showEl = document.getElementById(showId);
-            
-            hideEl.classList.remove('active-scene');
-            hideEl.classList.add('hidden-scene');
-            
-            showEl.classList.remove('hidden-scene');
-            showEl.classList.add('active-scene');
+            if (hideEl && showEl) {
+                hideEl.classList.replace('active-scene', 'hidden-scene');
+                showEl.classList.replace('hidden-scene', 'active-scene');
+            } else {
+                console.error("Error: Could not find scene elements", hideId, showId);
+            }
         }
 
         // 1. 點擊開始遊戲
@@ -185,7 +140,7 @@
             
             // 簡單的文字打字機效果
             const texts = [
-                "\"Hello? Is this grandma?\"",
+                "\"Hello? Is this Ruth Winter? Mother of Evelyn Anderson?\"",
                 "\"This is the City Police Department. We regret to inform you...\"",
                 "\"Your daughter was just involved in a severe car accident. She is currently in the emergency room at City Hospital.\"",
                 "\"Please come to the hospital immediately!\""
